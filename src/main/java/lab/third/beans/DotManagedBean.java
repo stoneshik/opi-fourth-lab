@@ -56,7 +56,7 @@ public class DotManagedBean implements Serializable {
         this.currentEntity.updateInfo();
         this.currentEntity.setTimeLead(System.nanoTime() - startTime);
         initTransaction(
-                manager -> manager.persist(this.currentEntity)
+            manager -> manager.persist(this.currentEntity)
         );
         this.dotEntities.add(0, this.currentEntity);
         this.currentEntity = new DotEntity();
@@ -64,7 +64,7 @@ public class DotManagedBean implements Serializable {
 
     public synchronized void removeAllDots() {
         initTransaction(
-                manager -> manager.createQuery("DELETE FROM DotEntity").executeUpdate()
+            manager -> manager.createQuery("DELETE FROM DotEntity").executeUpdate()
         );
         this.dotEntities.clear();
     }
