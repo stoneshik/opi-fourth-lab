@@ -1,17 +1,17 @@
 package lab.third.beans;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Model;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import lab.third.entities.DotEntity;
+import lab.third.jmx.JmxRegistry;
 import lab.third.util.TransactionExecutor;
-
-import java.io.Serializable;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 
 @Model
 @ApplicationScoped
@@ -25,9 +25,12 @@ public class DotManagedBean implements Serializable {
 
     public DotManagedBean() {
         initTransaction(
-                manager -> this.dotEntities.addAll(
-                        manager.createQuery("SELECT e FROM DotEntity e", DotEntity.class).getResultList()
-                )
+            manager -> this.dotEntities.addAll(
+                manager.createQuery(
+                    "SELECT e FROM DotEntity e",
+                    DotEntity.class
+                ).getResultList()
+            )
         );
     }
 
@@ -53,13 +56,15 @@ public class DotManagedBean implements Serializable {
 
     public synchronized void addNewDot() {
         long startTime = System.nanoTime();
-        this.currentEntity.updateInfo();
-        this.currentEntity.setTimeLead(System.nanoTime() - startTime);
-        initTransaction(
-            manager -> manager.persist(this.currentEntity)
-        );
-        this.dotEntities.add(0, this.currentEntity);
-        this.currentEntity = new DotEntity();
+        currentEntity.updateInfo();
+        currentEntity.setTimeLead(System.nanoTime() - startTime);
+        // JMX: факт клика
+        JmxRegistry.clickInterval().registerClick();
+        // JMX: статистика попаданий
+        JmxRegistry.dotStats().registerDot(currentEntity.getIsHit());
+        initTransaction(manager -> manager.persist(currentEntity));
+        dotEntities.add(0, currentEntity);
+        currentEntity = new DotEntity();
     }
 
     public synchronized void removeAllDots() {
