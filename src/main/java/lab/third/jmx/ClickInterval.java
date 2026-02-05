@@ -1,7 +1,6 @@
 package lab.third.jmx;
 
-public class ClickInterval
-    implements ClickIntervalMBean {
+public class ClickInterval implements ClickIntervalMBean {
     private long lastClickTime = -1;
     private long totalInterval = 0;
     private long intervalCount = 0;
