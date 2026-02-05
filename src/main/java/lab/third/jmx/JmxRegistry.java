@@ -11,12 +11,12 @@ public final class JmxRegistry {
         try {
             MBeanServer server = ManagementFactory.getPlatformMBeanServer();
             server.registerMBean(
-                    DOT_STATS,
-                    new ObjectName("lab.third:type=DotStats")
+                DOT_STATS,
+                new ObjectName("lab.third:type=DotStats")
             );
             server.registerMBean(
-                    CLICK_INTERVAL,
-                    new ObjectName("lab.third:type=ClickInterval")
+                CLICK_INTERVAL,
+                new ObjectName("lab.third:type=ClickInterval")
             );
         } catch (Exception e) {
             throw new IllegalStateException("JMX MBean registration failed", e);
