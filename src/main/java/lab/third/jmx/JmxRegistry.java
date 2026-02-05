@@ -24,12 +24,6 @@ public final class JmxRegistry {
     }
 
     private JmxRegistry() {}
-
-    public static DotStats dotStats() {
-        return DOT_STATS;
-    }
-
-    public static ClickInterval clickInterval() {
-        return CLICK_INTERVAL;
-    }
+    public static DotStats dotStats() { return DOT_STATS; }
+    public static ClickInterval clickInterval() { return CLICK_INTERVAL; }
 }

@@ -29,9 +29,7 @@ public class ClickInterval implements ClickIntervalMBean {
     }
 
     @Override
-    public synchronized long getClickCount() {
-        return clickCount;
-    }
+    public synchronized long getClickCount() { return clickCount; }
 
     @Override
     public synchronized void reset() {

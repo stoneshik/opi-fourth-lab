@@ -3,9 +3,7 @@ package lab.third.jmx;
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
 
-public class DotStats
-        extends NotificationBroadcasterSupport
-        implements DotStatsMBean {
+public class DotStats extends NotificationBroadcasterSupport implements DotStatsMBean {
     private static final String MISS_NOTIFICATION_TYPE = "lab.third.miss";
     private long totalCount;
     private long hitCount;
@@ -37,17 +35,9 @@ public class DotStats
     }
 
     @Override
-    public synchronized long getTotalCount() {
-        return totalCount;
-    }
-
+    public synchronized long getTotalCount() { return totalCount; }
     @Override
-    public synchronized long getHitCount() {
-        return hitCount;
-    }
-
+    public synchronized long getHitCount() { return hitCount; }
     @Override
-    public synchronized long getMissCount() {
-        return missCount;
-    }
+    public synchronized long getMissCount() { return missCount; }
 }
