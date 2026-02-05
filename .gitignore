@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 /wildfly
+/wildfly_heap**
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
